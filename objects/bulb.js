@@ -19,9 +19,10 @@ function Bulb(id,  label, connected, power, color) {
         this.update();
 
     }
-    var bulb = this;
-    if(id.getState){
-       id.getState(function(error, state) {
+    else if(id.getState){
+        var bulb = this;
+
+        id.getState(function(error, state) {
                 bulb.id = id.id;
 
                bulb.label = state.label;
@@ -50,11 +51,67 @@ function Bulb(id,  label, connected, power, color) {
         this.update()
     }
 }
+Bulb.prototype.turnOff = function(){
+    var client = require('../lifx.js');
+    var light = client.light(this.id);
+    if(light) {
+        light.off();
+        this.power = 0;
+    }else{
+        this.connected = false;
+    }
+    var config = require('../config.js');
+    config.persist(config.file, function(err){});
+};
+Bulb.prototype.turnOn = function(){
+    var client = require('../lifx.js');
+    var light = client.light(this.id);
+    if(light) {
+        light.on();
+        this.power = 1;
+    }else{
+        this.connected = false;
+    }
+    var config = require('../config.js');
+    config.persist(config.file, function(err){});
+};
+Bulb.prototype.toggle = function(){
+    var bulb = this;
+    var client = require('../lifx.js');
+    var light = client.light(this.id);
+    if(light) {
+    light.getState(function(state){
 
+            if(state.power = 1) {
+                light.off();
+                bulb.power = 0;
+            }else{
+                light.on();
+                bulb.power = 1;
+            }
+        var config = require('../config.js');
+        config.persist(config.file, function(err){});
+    });
+        }else{
+            bulb.connected = false;
+        var config = require('../config.js');
+        config.persist(config.file, function(err){});
+        }
+
+}
 Bulb.prototype.setColor = function(color, err){
     if(color instanceof Color) {
+        var client = require('../lifx.js');
         var light = client.light(this.id);
-        light.color(color.hue, color.saturation, color.brightness, color.kelvin, color.duration);
+        if(light) {
+            light.color(color.hue, color.saturation, color.brightness, color.kelvin, color.duration);
+        }
+        else{
+            this.connected = false;
+        }
+        this.color = color;
+        var config = require('../config.js');
+        config.persist(config.file, function(err){});
     }else{
         throw new Error('color is not instance of Color Object')
     }

@@ -4,16 +4,17 @@
 var Bulb = require('./bulb.js');
 var Color = require('./color.js');
 function Group(id, name, bulb) {
+    var mybulb = this;
     if(id.id  != undefined && id.name  != undefined && id.bulb != undefined ){
         this.id = id.id;
         this.bulb = new Array();
         this.name = id.name;
-        if (id.bulb.forEach()) {
+        if (id.bulb.forEach) {
             id.bulb.forEach(function (b) {
                 if (b instanceof Bulb) {
-                    this.bulb.push(b);
+                    mybulb.bulb.push(b);
                 } else {
-                    this.bulb.push(new Bulb(b));
+                    mybulb.bulb.push(new Bulb(b));
                 }
             })
         }
@@ -27,12 +28,13 @@ function Group(id, name, bulb) {
 
         this.bulb = new Array();
         this.name = name;
-        if (bulb.forEach()) {
+        if (bulb.forEach) {
             bulb.forEach(function (b) {
                 if (b instanceof Bulb) {
-                    this.bulb.push(b);
+                    mybulb.bulb.push(b);
                 } else {
-                    this.bulb.push(new Bulb(b));
+
+                    mybulb.bulb.push(new Bulb(b));
                 }
             })
         }
@@ -45,7 +47,7 @@ function Group(id, name, bulb) {
 
 Group.prototype.setColor = function(color){
     if(color instanceof Color){
-        this.bulb.foreach(function(b){
+        this.bulb.forEach(function(b){
             b.setColor(color);
             b.update();
         });
@@ -55,28 +57,20 @@ Group.prototype.setColor = function(color){
     }
 
 };
-Group.prototype.powerOn = function(){
-    this.bulb.foreach(function(b){
-        b.power = 1;
-        b.update();
+Group.prototype.turnOn = function(){
+    this.bulb.forEach(function(b){
+        b.turnOn();
     })
 };
-Group.prototype.powerOff = function(){
-    this.bulb.foreach(function(b){
-        b.power = 0;
-        b.update();
+Group.prototype.turnOff = function(){
+    this.bulb.forEach(function(b){
+        b.turnOff();
     });
 };
-Group.prototype.powerToggle = function(){
-    this.bulb.foreach(function(b){
-        if(b.power == 1){
-            b.power = 0;
-        }
-        else{
-            b.power = 1;
-        }
-        b.update();
+Group.prototype.toggle = function(){
+    this.bulb.forEach(function(b){
+        b.toggle();
     })
-}
+};
 
 module.exports = Group;
