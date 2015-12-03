@@ -8,7 +8,7 @@ function Config(file) {
     this.data = JSON.parse(fs.readFileSync(file, 'utf8'));
     var bulb = new Array();
     if(this.data.bulb instanceof Array){
-        this.data.bulb.foreach(function (b){
+        this.data.bulb.forEach(function (b){
             bulb.push(new Bulb(b));
         });
     }
@@ -16,14 +16,14 @@ function Config(file) {
     this.data.bulb = bulb;
     var group = new Array();
     if(this.data.group instanceof Array){
-        this.data.group.foreach(function(g){
+        this.data.group.forEach(function(g){
             group.push(new Group(g));
         });
     }
     this.data.group = group;
     var timeline = new Array();
     if(this.data.timeline instanceof Array){
-        this.data.timeline.foreach(function(t){
+        this.data.timeline.forEach(function(t){
             timeline.push(new Timeline(t));
         })
     }
@@ -84,7 +84,7 @@ Config.prototype.addBulb = function(bulb){
     var config = require('./config.js');
 
     var barr = config.data.bulb;
-    this.searchBulbById(bulb.id, function(b){
+    config.searchBulbById(bulb.id, function(b){
         if(!b){
             barr.push(bulb);
             config.persist(config.file, function(err){
@@ -101,7 +101,7 @@ Config.prototype.addBulb = function(bulb){
 Config.prototype.addGroup = function(group){
     var config = require('./config.js');
     var garr = config.data.group;
-    this.searchGroupById(group.id, function(g){
+    config.searchGroupById(group.id, function(g){
         if(!g){
             garr.push(group);
             config.persist(config.file, function(err){
