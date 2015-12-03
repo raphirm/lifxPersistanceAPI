@@ -18,7 +18,7 @@ function Bulb(id,  label, connected, power, color) {
         this.update();
 
     }
-    if(id.getState()){
+    if(id.getState){
        id.getState(function(error, state) {
            this.id = id.id;
            id.getLabel(function (error, data) {
