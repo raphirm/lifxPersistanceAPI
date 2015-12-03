@@ -33,7 +33,7 @@ function Config(file) {
 }
 
 Config.prototype.persist = function(file, callback){
-    fs.writeFile('file', JSON.stringify(this.data), 'utf8', function(err){
+    fs.writeFile(file, JSON.stringify(this.data), 'utf8', function(err){
         if(err){
             callback(err)
         }else{
@@ -87,7 +87,14 @@ Config.prototype.addBulb = function(bulb){
     this.searchBulbById(bulb.id, function(b){
         if(!b){
             barr.push(bulb);
-            config.persist();
+            config.persist(config.file, function(err){
+                if(!err){
+                    console.log("config updated");
+
+                }else{
+                    throw new Error('Persistance failed:' + err);
+                }
+            });
         }
     });
 };
