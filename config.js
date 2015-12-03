@@ -79,12 +79,11 @@ Config.prototype.searchGroupById = function(id, callback){
 
 
 };
-Config.prototype.addBulb = function(bulb, config){
+Config.prototype.addBulb = function(bulb){
 
-    if(!config){
-        config = this
-    }
-    var barr = this.data.bulb;
+    var config = require('./config.js');
+
+    var barr = config.data.bulb;
     this.searchBulbById(bulb.id, function(b){
         if(!b){
             barr.push(bulb);
@@ -100,8 +99,8 @@ Config.prototype.addBulb = function(bulb, config){
     });
 };
 Config.prototype.addGroup = function(group){
-    var garr = this.data.group;
     var config = require('./config.js');
+    var garr = config.data.group;
     this.searchGroupById(group.id, function(g){
         if(!g){
             garr.push(group);

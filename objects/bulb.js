@@ -28,7 +28,7 @@ function Bulb(id,  label, connected, power, color) {
                bulb.connected = true;
                bulb.power = state.power;
                bulb.color = new Color(state.color.hue, state.color.saturation, state.color.brightness, state.color.kelvin);
-                label(bulb, config)
+                label(bulb)
            });
 
 
