@@ -4,7 +4,7 @@
 var Bulb = require('./bulb.js');
 var Color = require('./color.js');
 function Group(id, name, bulb) {
-    if(id.id && id.name && id.bulb){
+    if(id.id  != undefined && id.name  != undefined && id.bulb != undefined ){
         this.id = id.id;
         this.bulb = new Array();
         this.name = id.name;

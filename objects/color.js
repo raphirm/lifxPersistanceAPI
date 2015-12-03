@@ -5,7 +5,7 @@
 
 function Color(hue, saturation, brightness, kelvin, duration) {
     // if we get an json object with all parameters
-    if(hue.hue && hue.saturation && hue.brightness){
+    if(hue.hue  != undefined && hue.saturation  != undefined && hue.brightness != undefined ){
         this.hue = hue.hue;
         this.saturation = hue.saturation;
         this.brightness = hue.brightness;

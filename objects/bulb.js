@@ -5,7 +5,7 @@ var Color = require('./color.js');
 var client = require('../lifx.js');
 var config = require('../config.js');
 function Bulb(id,  label, connected, power, color) {
-    if(id.id && id.label && id.connected && id.power && id.color){
+    if(id.id != undefined && id.label  != undefined && id.connected  != undefined && id.power  != undefined && id.color != undefined ){
         this.id = id.id;
         this.label = id.label;
         this.connected = id.connected;
@@ -22,7 +22,7 @@ function Bulb(id,  label, connected, power, color) {
     var bulb = this;
     if(id.getState){
        id.getState(function(error, state) {
-                bulb.id = state.id;
+                bulb.id = id.id;
 
                bulb.label = state.label;
                bulb.connected = true;

@@ -9,7 +9,7 @@ var Bulb = require('./bulb.js');
 var Group = require('./group.js');
 var client = require('../lifx.js');
 function Timeline(id, time, device) {
-    if(id.id && id.time && id.device){
+    if(id.id  != undefined && id.time  != undefined && id.device != undefined ){
         this.id = id.id;
         if(id.time instanceof Array){
             this.time = id.time;
