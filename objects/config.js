@@ -32,7 +32,7 @@ function Config(file) {
     this.data.timeline = timeline;
 }
 
-Config.prototype.persist = function(file){
+Config.prototype.persist = function(file, callback){
     fs.writeFile('file', JSON.stringify(this.data), 'utf8', function(err){
         if(err){
             callback(err)
@@ -97,7 +97,14 @@ Config.prototype.addGroup = function(group){
     this.searchGroupById(group.id, function(g){
         if(!g){
             garr.push(group);
-            config.persist();
+            config.persist(config.file, function(err){
+                if(!err){
+                    console.log("config updated");
+
+                }else{
+                    throw new Error('Persistance failed:' + err);
+                }
+            });
         }
     })
 };
