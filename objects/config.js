@@ -81,9 +81,12 @@ Config.prototype.searchGroupById = function(id, callback){
 
 
 };
-Config.prototype.addBulb = function(bulb){
+Config.prototype.addBulb = function(bulb, config){
+
+    if(!config){
+     config = this
+    }
     var barr = this.data.bulb;
-    var config = this;
     this.searchBulbById(bulb.id, function(b){
         if(!b){
             barr.push(bulb);
