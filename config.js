@@ -101,7 +101,7 @@ Config.prototype.addBulb = function(bulb, config){
 };
 Config.prototype.addGroup = function(group){
     var garr = this.data.group;
-    var config = this;
+    var config = require('./config.js');
     this.searchGroupById(group.id, function(g){
         if(!g){
             garr.push(group);
