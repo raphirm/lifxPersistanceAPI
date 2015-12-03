@@ -82,16 +82,22 @@ Config.prototype.searchGroupById = function(id, callback){
 
 };
 Config.prototype.addBulb = function(bulb){
-    this.searchBulbById(bulb.id, function(bulb){
-        if(!bulb){
-            this.data.bulb.push(bulb);
+    var barr = this.data.bulb;
+    var config = this;
+    this.searchBulbById(bulb.id, function(b){
+        if(!b){
+            barr.push(bulb);
+            config.persist();
         }
     });
 };
 Config.prototype.addGroup = function(group){
-    this.searchGroupById(group.id, function(group){
-        if(!group){
-            this.data.group.push(group);
+    var garr = this.data.group;
+    var config = this;
+    this.searchGroupById(group.id, function(g){
+        if(!g){
+            garr.push(group);
+            config.persist();
         }
     })
 };

@@ -1,7 +1,8 @@
 var LifxClient = require('node-lifx').Client;
 var client = new LifxClient();
 var config = require('./config.js');
-var Bulb = require('./objects/bulb.js')
+var Bulb = require('./objects/bulb.js');
+var Color= require('./objects/color.js');
 client.on('listening', function() {
   var address = client.address();
   console.log(

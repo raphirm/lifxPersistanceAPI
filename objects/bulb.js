@@ -59,18 +59,20 @@ Bulb.prototype.setColor = function(color, err){
 
 
 Bulb.prototype.update = function(){
-    var light = client.light(this.id);
-    if(light) {
-        light.getState(function (error, state) {
-            id.getLabel(function (error, label) {
-                this.label = data;
-                this.connected = true;
-                this.power = state.power;
-                this.color = new Color(state.color.hue, state.color.saturation, state.color.brightness, state.color.kelvin);
+    if(client.light) {
+        var light = client.light(this.id);
+        if (light) {
+            light.getState(function (error, state) {
+                id.getLabel(function (error, label) {
+                    this.label = data;
+                    this.connected = true;
+                    this.power = state.power;
+                    this.color = new Color(state.color.hue, state.color.saturation, state.color.brightness, state.color.kelvin);
+                });
             });
-        });
-    }else{
-        this.connected = false;
+        } else {
+            this.connected = false;
+        }
     }
 };
 
