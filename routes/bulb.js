@@ -66,7 +66,7 @@ router.get('/:lightId/on', function(req, res){
       config.searchBulbByLabel(req.params.lightId, function(bulb){
         if(!bulb){res.status(404).json({'status': 'bulb not found'});}
         else{
-          bulb.turnon();
+          bulb.turnOn();
           res.json(bulb);
         }
       });

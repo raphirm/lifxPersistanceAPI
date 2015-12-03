@@ -96,6 +96,17 @@ Config.prototype.addBulb = function(bulb){
                 }
             });
         }
+        else{
+            b.connected = true;
+            config.persist(config.file, function(err){
+                if(!err){
+                    console.log("config updated");
+
+                }else{
+                    throw new Error('Persistance failed:' + err);
+                }
+            });
+        }
     });
 };
 Config.prototype.addGroup = function(group){
