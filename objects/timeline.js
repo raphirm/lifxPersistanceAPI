@@ -9,10 +9,21 @@ var Bulb = require('./bulb.js');
 var Group = require('./group.js');
 var client = require('../lifx.js');
 function Timeline(id, time, color, device) {
-    if(id.id  != undefined && id.time  != undefined && id.device != undefined ){
+    if(id.id  != undefined && id.time  != undefined && id.device != undefined && id.color != undefined){
         this.id = id.id;
         if(id.time instanceof Array){
             this.time = id.time;
+        }else{
+            throw new Error('time value needs to be an array');
+        }
+        if(id.color instanceof Array){
+            if(id.time.length == id.color.length){
+                this.color = id.color;
+            }else{
+                throw new Error('time and color arrays needs to be the same size');
+            }
+        }else{
+            throw new Error('color value needs to be an array');
         }
         if(id.device.power){
            if( id.device instanceof Bulb){
@@ -37,24 +48,27 @@ function Timeline(id, time, color, device) {
     else
     {
         this.id = id;
-        this.time = time;
+        if(time instanceof Array){
+            this.time = time;
+        }else{
+            throw new Error('time value needs to be an array');
+        }
+        if(color instanceof Array){
+            if(time.length == color.length){
+                this.color = color;
+            }else{
+                throw new Error('time and color arrays needs to be the same size');
+            }
+        }else{
+            throw new Error('color value needs to be an array');
+        }
+        var config = require('../config.js');
+       config.searchBulbById(device, function(bulb){
+           if(!bulb){
+               config.searchBulbByLabel(device)
+           }
+       });
 
-        if(id.device.power){
-            if( id.device instanceof Bulb){
-                this.device =device
-            }else{
-                this.device = new Bulb(device);
-            }
-        }else if (id.device.bulb){
-            if(id.device instanceof Group){
-                this.device = device
-            }else{
-                this.device = new Group(device);
-            }
-        }
-        else{
-            throw new Error('no valid device');
-        }
     }
 }
 
