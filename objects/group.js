@@ -1,8 +1,8 @@
 /**
  * Created by raphi on 02.12.2015.
  */
-var Bulb = require('./Bulb');
-var Color = require('./Color');
+var Bulb = require('./bulb.js');
+var Color = require('./color.js');
 function Group(id, name, bulb) {
     if(id.id && id.name && id.bulb){
         this.id = id.id;

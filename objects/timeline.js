@@ -4,9 +4,9 @@
 /**
  * Created by raphi on 02.12.2015.
  */
-var Color = require('./Color');
-var Bulb = require('./Bulb');
-var Group = require('./Group');
+var Color = require('./color.js');
+var Bulb = require('./bulb.js');
+var Group = require('./group.js');
 var client = require('../lifx.js');
 function Timeline(id, time, device) {
     if(id.id && id.time && id.device){

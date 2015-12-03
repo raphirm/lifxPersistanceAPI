@@ -2,9 +2,9 @@
  * Created by raphi on 02.12.2015.
  */
 var fs = require('fs');
-var Bulb = require('./Bulb');
-var Group = require('./Group');
-var Timeline = require('./Timeline');
+var Bulb = require('./bulb.js');
+var Group = require('./group.js');
+var Timeline = require('./timeline.js');
 function Config(file) {
     this.file = file;
     this.data = JSON.parse(fs.readFileSync(file, 'utf8'));

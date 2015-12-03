@@ -1,7 +1,7 @@
 /**
  * Created by raphi on 02.12.2015.
  */
-var Color = require('./Color');
+var Color = require('./color.js');
 var client = require('../lifx.js');
 function Bulb(id,  label, connected, power, color) {
     if(id.id && id.label && id.connected && id.power && id.color){
