@@ -27,5 +27,5 @@ client.on('light-new', function(light) {
         console.log('Power:', (info.power === 1) ? 'on' : 'off');
         console.log('Color:', info.color, '\n');
     });
-    config.addBulb(new Bulb(light));
+    new Bulb(light,config.addBulb(bulb));
 });

@@ -18,16 +18,18 @@ function Bulb(id,  label, connected, power, color) {
         this.update();
 
     }
+    var bulb = this;
     if(id.getState){
        id.getState(function(error, state) {
-           this.id = id.id;
-           id.getLabel(function (error, data) {
-               this.label = data;
-               this.connected = true;
-               this.power = state.power;
-               this.color = new Color(state.color.hue, state.color.saturation, state.color.brightness, state.color.kelvin);
+           bulb.id = id.id;
+
+               bulb.label = state.label;
+               bulb.connected = true;
+               bulb.power = state.power;
+               bulb.color = new Color(state.color.hue, state.color.saturation, state.color.brightness, state.color.kelvin);
+                label(bulb)
            });
-       });
+
 
 
     }
