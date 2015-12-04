@@ -192,7 +192,7 @@ Timeline.prototype.update = function(){
                 b.update();
                 if(pl.offline == false) {
                     if ((pl.color.hue != b.color.hue || b.color.brightness!= pl.color.brightness || b.color.saturation != pl.color.saturation)) {
-                        console.log("Color of "+ b.id+" not the same, stopping:"+pl.color+" and "+ b.color);
+                        console.log("Color of "+ b.id+" not the same, stopping:"+JSON.stringify(pl.color)+" and "+ JSON.stringify(b.color));
                         stop = true;
                     }
                 }
