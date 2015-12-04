@@ -165,21 +165,22 @@ function calculate(time, color){
     if((typeof kelvin !== 'number' && kelvin !== undefined) || kelvin < 2500 || kelvin > 9000){
         kelvin = 3500;
     }
-    var timeColor = new Color((((e.color.hue - b.color.hue) / interval * now) + b.color.hue),
-        (((e.color.saturation - b.color.saturation) / interval * now) + b.color.saturation),
-        (((e.color.brightness - b.color.brightness) / interval * now) + b.color.brightness),
-        kelvin);
+    var timeColor = new Color(Math.round((((e.color.hue - b.color.hue) / interval * now) + b.color.hue)),
+        Math.round((((e.color.saturation - b.color.saturation) / interval * now) + b.color.saturation)),
+            Math.round((((e.color.brightness - b.color.brightness) / interval * now) + b.color.brightness)),
+                Math.round(kelvin));
     return timeColor;
 
 }
 Timeline.prototype.update = function(){
-    var calc = calculate(this.time, this.color);
+
     var config = require('../config.js');
     //calculate color
     var timeline = this;
     //var light = client.light(this.id);
     //light.color(color.hue, color.saturation, color.brightness, color.kelvin, color.duration);
-    if(timeline.time[0] > getNow() && timeline.time[1] < getnow()){
+    if(timeline.time[0] > getNow() && timeline.time[1] < getNow()){
+        var calc = calculate(this.time, this.color);
         //timeline applies now
         timeline.active = true;
         //calculate light
