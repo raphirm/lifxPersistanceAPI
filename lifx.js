@@ -3,38 +3,46 @@ var client = new LifxClient();
 var config = require('./config.js');
 var Bulb = require('./objects/bulb.js');
 var Color= require('./objects/color.js');
-var INTERVAL = 10000;
+var INTERVAL = 3000;
 
 function loop(data, callback){
     //config.status=='started'
-
+    var count = 0;
     var timer = setInterval(function () {
+
         //update color info regularily, if some other application did change settings
         console.log("interval started, updating all lights")
         var lights = client.lights();
 
-        if(lights instanceof Array) {
+        if (lights instanceof Array) {
             lights.forEach(function (light) {
-                console.log("setting color for light "+light.id);
-              config.searchBulbById(light.id, function(bulb){
-                   if (bulb) {
-                       bulb.update()
-                   } else {
-                       console.log(light.id + "is not registred in application");
-                   }
-               });
+                console.log("setting color for light " + light.id);
+                config.searchBulbById(light.id, function (bulb) {
+                    if (bulb) {
+                        bulb.update()
+                    } else {
+                        console.log(light.id + "is not registred in application");
+                    }
+                });
 
             });
         }
 
         //if there is a timeline, start it now!
         //tbd
-        if(config.data.timeline.length >0 ){
-            config.data.timeline.forEach(function(timeline){
-                console.log("applying timline "+timeline.id);
-                timeline.update();
-            });
+        if ((count % 20) == 0){
+            if (config.data.timeline.length > 0) {
+
+                config.data.timeline.forEach(function (timeline) {
+                    console.log("applying timline " + timeline.id);
+                    timeline.update();
+
+                });
+            }
+            count = 1;
+
         }
+        count = count + 1;
 
     }, INTERVAL);
 

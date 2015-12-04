@@ -223,6 +223,7 @@ Timeline.prototype.update = function(){
                         pl.color = calc;
                         console.log(b.id+" will update to "+ calc+" now");
                         pl.offline=false;
+                        calc.duration = 10000;
                         b.setColor(calc);
                     }
                 });
@@ -242,6 +243,7 @@ Timeline.prototype.update = function(){
                         pl.color = calc;
                         console.log(b.id+" will update to "+ JSON.stringify(calc)+" now");
                         pl.offline = false;
+                        calc.duration = 5000;
                         b.setColor(calc);
                     }
                     timeline.prev.push(pl);
