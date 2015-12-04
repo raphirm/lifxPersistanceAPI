@@ -140,7 +140,7 @@ function getBulbs(id, timeline){
     }
     if(timeline.dtype == "group"){
         config.searchGroupById(id, function(g){
-            g.forEach(function(b){
+            g.bulb.forEach(function(b){
                 bulbs.push(b);
             })
         })
