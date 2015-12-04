@@ -189,8 +189,10 @@ Timeline.prototype.update = function(){
             var prevlights = timeline.prev;
             getBulbs(timeline.device, timeline).forEach(function(b){
                 var pl = arrayObjectIndexOf(prevlights, b.id, 'id');
+                b.update();
                 if(pl.offline == false) {
                     if ((pl.color.hue != b.color.hue || b.color.brightness() != pl.color.brightness || b.color.saturation != pl.color.saturation)) {
+                        console.log("Color of "+ b.id+" not the same, stopping:"+pl.color+" and "+ b.color);
                         stop = true;
                     }
                 }
@@ -198,30 +200,39 @@ Timeline.prototype.update = function(){
 
 
             });
-            if(stop = true){
+            if(stop == true){
                 console.log("different color, stop update")
             }else{
+                console.log("same color, start update");
                 getBulbs(timeline.device, timeline).forEach(function(b){
                     var pl = arrayObjectIndexOf(prevlights, b.id, 'id');
                     if(b.connected == false){
                         pl.offline = true;
+                        console.log(b.id+" is offline, no update");
                     }
                     else{
                         pl.color = calc;
+                        console.log(b.id+" will update to "+ calc+" now");
+
                         b.setColor(calc);
                     }
                 });
             }
         }
         else{
+            console.log("First iteration of timeline, creating new prev-Array");
                 timeline.prev = new Array()
                 getBulbs(timeline.device, timeline).forEach(function(b){
                     var pl = {"id": b.id};
                     if(b.connected == false){
+                        console.log(b.id+" is offline, no update");
+
                         pl.offline = true;
                     }
                     else{
                         pl.color = calc;
+                        console.log(b.id+" will update to "+ calc+" now");
+
                         b.setColor(calc);
                     }
                     timeline.prev.push(pl);
@@ -233,7 +244,10 @@ Timeline.prototype.update = function(){
 
     }else{
         //timeline does not apply anymore
+        console.log("not in timeline, no updates");
         if(timeline.active == true){
+            console.log("not in timeline and already ran, delete timeline");
+
             config.data.timeline.splice(config.data.timeline.indexOf(timeline), 1);
 
         }
