@@ -10,7 +10,7 @@ function loop(data, callback){
 
     var timer = setInterval(function () {
         //update color info regularily, if some other application did change settings
-        console.log("interval started, updateing all lights")
+        console.log("interval started, updating all lights")
         var lights = client.lights();
 
         if(lights instanceof Array) {
@@ -29,6 +29,12 @@ function loop(data, callback){
 
         //if there is a timeline, start it now!
         //tbd
+        if(config.data.timeline.length >0 ){
+            config.data.timeline.forEach(function(timeline){
+                console.log("applying timline "+timeline.id);
+                timeline.update();
+            });
+        }
 
     }, INTERVAL);
 

@@ -1,1 +1,1 @@
-{"bulb":[{"id":"d073d5018917","label":"nachttisch","connected":false,"power":1,"color":{"hue":0,"saturation":0,"brightness":10,"kelvin":9000,"duration":10}}],"group":[],"timeline":[]}
+{"bulb":[{"id":"d073d5018917","label":"nachttisch","connected":false,"power":1,"color":{"hue":0,"saturation":0,"brightness":10,"kelvin":9000,"duration":10}}],"group":[],"timeline":[{"id":"tlnveodsjw83q5mi","time":[3600,7200],"color":[{"hue":60,"saturation":0,"brightness":100,"kelvin":9000},{"hue":60,"saturation":0,"brightness":100,"kelvin":9000}],"device":"d073d5018917"}]}

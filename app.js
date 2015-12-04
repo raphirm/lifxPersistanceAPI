@@ -10,6 +10,8 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 var bulb = require('./routes/bulb');
 var group = require('./routes/group');
+var timeline = require('./routes/timeline');
+
 var app = express();
 
 // view engine setup
@@ -28,6 +30,8 @@ app.use('/', routes);
 app.use('/users', users);
 app.use('/bulb', bulb);
 app.use('/group', group);
+app.use('/timeline', timeline);
+
 
 
 // catch 404 and forward to error handler

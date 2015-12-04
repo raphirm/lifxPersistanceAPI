@@ -10,11 +10,20 @@ function Group(id, name, bulb) {
         this.bulb = new Array();
         this.name = id.name;
         if (id.bulb.forEach) {
+            var config = require('../config.js');
             id.bulb.forEach(function (b) {
                 if (b instanceof Bulb) {
                     mybulb.bulb.push(b);
                 } else {
-                    mybulb.bulb.push(new Bulb(b));
+                    if(b.id){
+                        config.searchBulbById(b.id, function(bulb){
+                            mybulb.bulb.push(bulb)
+                        });
+                    }else{
+                        config.searchBulbById(b, function(bulb){
+                            mybulb.bulb.push(bulb);
+                        });
+                    }
                 }
             })
         }
@@ -29,12 +38,20 @@ function Group(id, name, bulb) {
         this.bulb = new Array();
         this.name = name;
         if (bulb.forEach) {
+            var config = require('../config.js');
             bulb.forEach(function (b) {
                 if (b instanceof Bulb) {
                     mybulb.bulb.push(b);
                 } else {
-
-                    mybulb.bulb.push(new Bulb(b));
+                    if(b.id){
+                        config.searchBulbById(b.id, function(bulb){
+                            mybulb.bulb.push(bulb)
+                        });
+                    }else{
+                        config.searchBulbById(b, function(bulb){
+                            mybulb.bulb.push(bulb);
+                        });
+                    }
                 }
             })
         }

@@ -21,13 +21,7 @@ function Config(file) {
         });
     }
     this.data.group = group;
-    var timeline = new Array();
-    if(this.data.timeline instanceof Array){
-        this.data.timeline.forEach(function(t){
-            timeline.push(new Timeline(t));
-        })
-    }
-    this.data.timeline = timeline;
+
 }
 
 Config.prototype.persist = function(file, callback){
@@ -127,7 +121,17 @@ Config.prototype.addGroup = function(group){
     })
 };
 
+Config.prototype.initTimeline = function(){
+    var timeline = new Array();
+    if(this.data.timeline instanceof Array){
+        this.data.timeline.forEach(function(t){
+            timeline.push(new Timeline(t));
+        })
+    }
+    this.data.timeline = timeline;
+}
+var config = new Config('config');
 
 
-
-module.exports = exports = new Config('config');
+module.exports = exports = config;
+config.initTimeline();
