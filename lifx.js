@@ -3,6 +3,33 @@ var client = new LifxClient();
 var config = require('./config.js');
 var Bulb = require('./objects/bulb.js');
 var Color= require('./objects/color.js');
+var INTERVAL = 5000;
+
+function loop(data, callback){
+    //config.status=='started'
+
+    var timer = setInterval(function () {
+        //update color info regularily, if some other application did change settings
+        var lights = client.lights('');
+        if(lights instanceof Array) {
+            lights.forEach(function (light) {
+                var bulb = config.searchBulbById(light.id);
+                if (bulb) {
+                    bulb.update()
+                } else {
+                    console.log(light.id + "is not registred in application");
+                }
+            });
+        }
+
+        //if there is a timeline, start it now!
+        //tbd
+
+    }, INTERVAL);
+
+}
+
+
 client.on('listening', function() {
   var address = client.address();
   console.log(
@@ -52,3 +79,5 @@ client.on('light-offline', function(light) {
     });
     console.log('Light offline. ID:' + light.id + ', IP:' + light.address + ':' + light.port + '\n');
 });
+
+loop();
