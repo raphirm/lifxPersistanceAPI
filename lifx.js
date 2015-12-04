@@ -36,7 +36,7 @@ function loop(data, callback){
                 config.data.timeline.forEach(function (timeline) {
                     console.log("applying timline " + timeline.id);
                     timeline.update();
-                    config.persist(config, function(){});
+                    config.persist(config.file, function(){});
 
                 });
             }
