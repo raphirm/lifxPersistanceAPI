@@ -120,18 +120,19 @@ Bulb.prototype.setColor = function(color, err){
 
 Bulb.prototype.update = function(){
     var client = require('../lifx.js');
+    var mybulb = this;
     if(client.light) {
 
-        var light = client.light(this.id);
+        var light = client.light(mybulb.id);
         if (light) {
-            console.log("updating" +light.id)
+            console.log("updating " +light.id)
             light.getState(function (error, state) {
-                id.getLabel(function (error, label) {
-                    this.label = data;
-                    this.connected = true;
-                    this.power = state.power;
-                    this.color = new Color(state.color.hue, state.color.saturation, state.color.brightness, state.color.kelvin);
-                });
+
+                    mybulb.label = label;
+                    mybulb.connected = true;
+                    mybulb.power = state.power;
+                    mybulb.color = new Color(state.color.hue, state.color.saturation, state.color.brightness, state.color.kelvin);
+
             });
         } else {
             this.connected = false;

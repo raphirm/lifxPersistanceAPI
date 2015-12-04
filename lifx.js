@@ -15,7 +15,7 @@ function loop(data, callback){
 
         if(lights instanceof Array) {
             lights.forEach(function (light) {
-                console.log("setting color for light "+light);
+                console.log("setting color for light "+light.id);
               config.searchBulbById(light.id, function(bulb){
                    if (bulb) {
                        bulb.update()
