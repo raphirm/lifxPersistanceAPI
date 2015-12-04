@@ -128,7 +128,7 @@ Bulb.prototype.update = function(){
             console.log("updating " +light.id)
             light.getState(function (error, state) {
 
-                    mybulb.label = label;
+                    mybulb.label = state.label;
                     mybulb.connected = true;
                     mybulb.power = state.power;
                     mybulb.color = new Color(state.color.hue, state.color.saturation, state.color.brightness, state.color.kelvin);
