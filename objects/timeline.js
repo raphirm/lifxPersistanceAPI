@@ -172,6 +172,15 @@ function calculate(time, color){
     return timeColor;
 
 }
+function isSimilar(number1, number2){
+    var un1 = Math.ceil(number1 + (0.2 * number1));
+    var on1 = Math.floor(number1 - (0.2 * number1));
+    if(un1 > number2 && on1 < number2){
+        return true
+    }else{
+        return false
+    }
+}
 Timeline.prototype.update = function(){
 
     var config = require('../config.js');
@@ -191,7 +200,7 @@ Timeline.prototype.update = function(){
                 var pl = timeline.prev[arrayObjectIndexOf(prevlights, b.id, 'id')];
                 b.update();
                 if(pl.offline == false) {
-                    if ((pl.color.hue != b.color.hue || b.color.brightness!= pl.color.brightness || b.color.saturation != pl.color.saturation)) {
+                    if (!(isSimilar(pl.color.hue,b.color.hue) && isSimilar(b.color.brightness,pl.color.brightness) && isSimilar(b.color.saturation, pl.color.saturation))) {
                         console.log("Color of "+ b.id+" not the same, stopping:"+JSON.stringify(pl.color)+" and "+ JSON.stringify(b.color));
                         stop = true;
                     }
@@ -253,6 +262,7 @@ Timeline.prototype.update = function(){
         }
     }
 };
+
 
 
 module.exports = Timeline;
