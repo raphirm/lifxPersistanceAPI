@@ -179,7 +179,7 @@ Timeline.prototype.update = function(){
     var timeline = this;
     //var light = client.light(this.id);
     //light.color(color.hue, color.saturation, color.brightness, color.kelvin, color.duration);
-    if(timeline.time[0] > getNow() && timeline.time[1] < getNow()){
+    if(timeline.time[0] < getNow() && timeline.time[1] > getNow()){
         var calc = calculate(this.time, this.color);
         //timeline applies now
         timeline.active = true;
