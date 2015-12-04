@@ -119,9 +119,12 @@ Bulb.prototype.setColor = function(color, err){
 
 
 Bulb.prototype.update = function(){
+    var client = require('../lifx.js');
     if(client.light) {
+
         var light = client.light(this.id);
         if (light) {
+            console.log("updating" +light.id)
             light.getState(function (error, state) {
                 id.getLabel(function (error, label) {
                     this.label = data;
