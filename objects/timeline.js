@@ -191,7 +191,7 @@ Timeline.prototype.update = function(){
                 var pl = timeline.prev[arrayObjectIndexOf(prevlights, b.id, 'id')];
                 b.update();
                 if(pl.offline == false) {
-                    if ((pl.color.hue != b.color.hue || b.color.brightness() != pl.color.brightness || b.color.saturation != pl.color.saturation)) {
+                    if ((pl.color.hue != b.color.hue || b.color.brightness!= pl.color.brightness || b.color.saturation != pl.color.saturation)) {
                         console.log("Color of "+ b.id+" not the same, stopping:"+pl.color+" and "+ b.color);
                         stop = true;
                     }
