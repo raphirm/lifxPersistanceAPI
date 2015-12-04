@@ -231,7 +231,7 @@ Timeline.prototype.update = function(){
                     }
                     else{
                         pl.color = calc;
-                        console.log(b.id+" will update to "+ calc+" now");
+                        console.log(b.id+" will update to "+ JSON.stringify(calc)+" now");
                         pl.offline = false;
                         b.setColor(calc);
                     }
