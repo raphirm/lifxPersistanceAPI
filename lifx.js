@@ -3,7 +3,7 @@ var client = new LifxClient();
 var config = require('./config.js');
 var Bulb = require('./objects/bulb.js');
 var Color= require('./objects/color.js');
-var INTERVAL = 5000;
+var INTERVAL = 10000;
 
 function loop(data, callback){
     //config.status=='started'
