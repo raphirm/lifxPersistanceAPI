@@ -188,7 +188,7 @@ Timeline.prototype.update = function(){
             var stop = false;
             var prevlights = timeline.prev;
             getBulbs(timeline.device, timeline).forEach(function(b){
-                var pl = arrayObjectIndexOf(prevlights, b.id, 'id');
+                var pl = timeline.prev[arrayObjectIndexOf(prevlights, b.id, 'id')];
                 b.update();
                 if(pl.offline == false) {
                     if ((pl.color.hue != b.color.hue || b.color.brightness() != pl.color.brightness || b.color.saturation != pl.color.saturation)) {
@@ -205,7 +205,7 @@ Timeline.prototype.update = function(){
             }else{
                 console.log("same color, start update");
                 getBulbs(timeline.device, timeline).forEach(function(b){
-                    var pl = arrayObjectIndexOf(prevlights, b.id, 'id');
+                    var pl = timeline.prev[arrayObjectIndexOf(prevlights, b.id, 'id')];
                     if(b.connected == false){
                         pl.offline = true;
                         console.log(b.id+" is offline, no update");
