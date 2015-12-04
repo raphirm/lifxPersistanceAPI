@@ -16,12 +16,14 @@ function loop(data, callback){
         if(lights instanceof Array) {
             lights.forEach(function (light) {
                 console.log("setting color for light "+light);
-               var bulb = config.searchBulbById(light.id);
-                if (bulb) {
-                    bulb.update()
-                } else {
-                    console.log(light.id + "is not registred in application");
-                }
+              config.searchBulbById(light.id, function(bulb){
+                   if (bulb) {
+                       bulb.update()
+                   } else {
+                       console.log(light.id + "is not registred in application");
+                   }
+               });
+
             });
         }
 
