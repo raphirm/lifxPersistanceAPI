@@ -14,13 +14,7 @@ function Config(file) {
     }
 
     this.data.bulb = bulb;
-    var group = new Array();
-    if(this.data.group instanceof Array){
-        this.data.group.forEach(function(g){
-            group.push(new Group(g));
-        });
-    }
-    this.data.group = group;
+
 
 }
 
@@ -129,6 +123,13 @@ Config.prototype.initTimeline = function(){
         })
     }
     this.data.timeline = timeline;
+    var group = new Array();
+    if(this.data.group instanceof Array){
+        this.data.group.forEach(function(g){
+            group.push(new Group(g));
+        });
+    }
+    this.data.group = group;
 }
 var config = new Config('config');
 
