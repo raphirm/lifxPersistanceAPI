@@ -19,6 +19,7 @@ router.put('/', function(req, res){
     if(t.time[0]=='now'){
       t.time[0] = new Date().getHours() * 3600 + new Date().getMinutes() * 60 + new Date().getSeconds();
     }
+
     var timeline = new Timeline(id, t.time, t.color, t.device);
 
     config.data.timeline.push(timeline);

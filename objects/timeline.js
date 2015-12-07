@@ -22,8 +22,12 @@ function Timeline(id, time, color, device) {
         if(id.color instanceof Array){
             if(id.time.length == id.color.length){
                 id.color.forEach(function(color){
-                    var color = new Color(color);
-                    timeline.color.push(color);
+                    if(color == 'now'){
+                        timeline.color.push(color);
+                    }else {
+                        var color = new Color(color);
+                        timeline.color.push(color);
+                    }
                 })
             }else{
                 throw new Error('time and color arrays needs to be the size 2');
@@ -42,24 +46,40 @@ function Timeline(id, time, color, device) {
 
                                     }else{
                                         timeline.device = group.id;
+                                        timeline.dtype = "group";
+                                        if(color[0] == 'now'){
+                                            timeline.color[0] == group.bulb[0].color;
+                                        }
 
                                     }
                                 });
                             }
                             else{
                                 timeline.device = group.id;
+                                timeline.dtype = "group";
+                                if(color[0] == 'now'){
+                                    timeline.color[0] == group.bulb[0].color;
+                                }
 
                             }
                         });
                     }
                     else{
                         timeline.device = bulb.id;
+                        timeline.dtype = "bulb";
+                        if(color[0] == 'now'){
+                            timeline.color[0] == bulb.color;
+                        }
                     }
                 });
 
             }
             else{
                 timeline.device = bulb.id;
+                timeline.dtype = "bulb";
+                if(color[0] == 'now'){
+                    timeline.color[0] == bulb.color;
+                }
             }
         });
 
@@ -78,8 +98,12 @@ function Timeline(id, time, color, device) {
         if(color instanceof Array){
             if(time.length == color.length){
                 color.forEach(function(color){
-                    var color = new Color(color);
-                    timeline.color.push(color);
+                    if(color == 'now'){
+                        timeline.color.push(color);
+                    }else {
+                        var color = new Color(color);
+                        timeline.color.push(color);
+                    }
                 })
             }else{
                 throw new Error('time and color arrays needs to be the same size');
@@ -96,10 +120,13 @@ function Timeline(id, time, color, device) {
                          if(!group){
                              config.searchGroupByName(device, function(group){
                                  if(!group){
-
+                                    throw new Error("no device found");
                                  }else{
                                      timeline.device = group.id;
                                      timeline.dtype = "group";
+                                     if(color[0] == 'now'){
+                                         timeline.color[0] == group.bulb[0].color;
+                                     }
 
                                  }
                             });
@@ -107,6 +134,9 @@ function Timeline(id, time, color, device) {
                          else{
                              timeline.device = group.id;
                              timeline.dtype = "group";
+                             if(color[0] == 'now'){
+                                 timeline.color[0] == group.bulb[0].color;
+                             }
 
                          }
                      });
@@ -114,6 +144,9 @@ function Timeline(id, time, color, device) {
                  else{
                      timeline.device = bulb.id;
                      timeline.dtype = "bulb";
+                     if(color[0] == 'now'){
+                         timeline.color[0] == bulb.color;
+                     }
                  }
                });
 
@@ -121,6 +154,9 @@ function Timeline(id, time, color, device) {
            else{
                timeline.device = bulb.id;
                timeline.dtype = "bulb";
+               if(color[0] == 'now'){
+                   timeline.color[0] == bulb.color;
+               }
            }
        });
 
