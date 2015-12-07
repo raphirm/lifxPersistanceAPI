@@ -48,7 +48,7 @@ function Timeline(id, time, color, device) {
                                         timeline.device = group.id;
                                         timeline.dtype = "group";
                                         if(timeline.color[0] == 'now'){
-                                            timeline.color[0] == group.bulb[0].color;
+                                            timeline.color[0] = group.bulb[0].color;
                                         }
 
                                     }
@@ -58,7 +58,7 @@ function Timeline(id, time, color, device) {
                                 timeline.device = group.id;
                                 timeline.dtype = "group";
                                 if(timeline.color[0] == 'now'){
-                                    timeline.color[0] == group.bulb[0].color;
+                                    timeline.color[0] = group.bulb[0].color;
                                 }
 
                             }
@@ -68,7 +68,7 @@ function Timeline(id, time, color, device) {
                         timeline.device = bulb.id;
                         timeline.dtype = "bulb";
                         if(timeline.color[0] == 'now'){
-                            timeline.color[0] == bulb.color;
+                            timeline.color[0] = bulb.color;
                         }
                     }
                 });
@@ -78,7 +78,7 @@ function Timeline(id, time, color, device) {
                 timeline.device = bulb.id;
                 timeline.dtype = "bulb";
                 if(timeline.color[0] == 'now'){
-                    timeline.color[0] == bulb.color;
+                    timeline.color[0] = bulb.color;
                 }
             }
         });
@@ -125,7 +125,7 @@ function Timeline(id, time, color, device) {
                                      timeline.device = group.id;
                                      timeline.dtype = "group";
                                      if(timeline.color[0] == 'now'){
-                                         timeline.color[0] == group.bulb[0].color;
+                                         timeline.color[0] = group.bulb[0].color;
                                      }
 
                                  }
@@ -134,8 +134,8 @@ function Timeline(id, time, color, device) {
                          else{
                              timeline.device = group.id;
                              timeline.dtype = "group";
-                             if(timeline.color[0] == 'now'){
-                                 timeline.color[0] == group.bulb[0].color;
+                             if(timeline.color[0] == "now"){
+                                 timeline.color[0] = group.bulb[0].color;
                              }
 
                          }
@@ -144,8 +144,8 @@ function Timeline(id, time, color, device) {
                  else{
                      timeline.device = bulb.id;
                      timeline.dtype = "bulb";
-                     if(timeline.color[0] == 'now'){
-                         timeline.color[0] == bulb.color;
+                     if(timeline.color[0] == "now"){
+                         timeline.color[0] = bulb.color;
                      }
                  }
                });
@@ -154,8 +154,8 @@ function Timeline(id, time, color, device) {
            else{
                timeline.device = bulb.id;
                timeline.dtype = "bulb";
-               if(timeline.color[0] == 'now'){
-                   timeline.color[0] == bulb.color;
+               if(timeline.color[0] == "now"){
+                   timeline.color[0] = bulb.color;
                }
            }
        });
