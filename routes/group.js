@@ -39,6 +39,43 @@ router.put('/:groupId', function(req, res){
   }
 //tbd
 });
+router.post('/:groupId', function(req, res){
+  config.searchGroupById(req.params.groupId, function(group){
+    var b = req.body.bulb;
+    var bulbs = new Array();
+    b.forEach(function(bname){
+      config.searchBulbById(bname, function(bulb){
+        if(!bulb){
+          config.searchBulbByLabel(bname, function(bulb){
+            if(!bulb){
+              res.status(404).json({'status': 'bulb not found'});
+            }else{
+              bulbs.push(bulb);
+            }
+          })
+        }else{
+          bulbs.push(bulb);
+        }
+      })
+    });
+    try {
+      group.bulb = bulbs;
+      config.persist(config.file, function(){});
+      res.json(group);
+    }catch(err){
+      res.status(501).json({'status': 'error:'+err});
+    }
+  });
+//tbd
+});
+router.delete('/:groupId', function(req, res){
+  config.searchGroupById(req.params.groupId, function(group){
+    var i = config.data.group.indexOf(group)
+    config.data.group.splice(i, 1);
+    config.persist(config.file, function(){});
+    res.status(200).json(config.data.group);
+  });
+});
 router.get('/:groupId', function(req, res, next){
   var group;
   config.searchGroupById(req.params.groupId, function(group){

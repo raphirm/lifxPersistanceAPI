@@ -19,6 +19,7 @@ function Timeline(id, time, color, device) {
             throw new Error('time value needs to be an array');
         }
         timeline.color = new Array();
+
         if(id.color instanceof Array){
             if(id.time.length == id.color.length){
                 id.color.forEach(function(color){
