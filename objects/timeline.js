@@ -209,8 +209,8 @@ function calculate(time, color){
 
 }
 function isSimilar(number1, number2){
-    var un1 = Math.ceil(number1 + (0.2 * number1));
-    var on1 = Math.floor(number1 - (0.2 * number1));
+    var un1 = Math.ceil(number1 + (0.2 * number1))+1;
+    var on1 = Math.floor(number1 - (0.2 * number1))-1;
     if(un1 > number2 && on1 < number2){
         return true
     }else{
