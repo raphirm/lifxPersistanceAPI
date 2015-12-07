@@ -47,7 +47,7 @@ function Timeline(id, time, color, device) {
                                     }else{
                                         timeline.device = group.id;
                                         timeline.dtype = "group";
-                                        if(color[0] == 'now'){
+                                        if(timeline.color[0] == 'now'){
                                             timeline.color[0] == group.bulb[0].color;
                                         }
 
@@ -57,7 +57,7 @@ function Timeline(id, time, color, device) {
                             else{
                                 timeline.device = group.id;
                                 timeline.dtype = "group";
-                                if(color[0] == 'now'){
+                                if(timeline.color[0] == 'now'){
                                     timeline.color[0] == group.bulb[0].color;
                                 }
 
@@ -67,7 +67,7 @@ function Timeline(id, time, color, device) {
                     else{
                         timeline.device = bulb.id;
                         timeline.dtype = "bulb";
-                        if(color[0] == 'now'){
+                        if(timeline.color[0] == 'now'){
                             timeline.color[0] == bulb.color;
                         }
                     }
@@ -77,7 +77,7 @@ function Timeline(id, time, color, device) {
             else{
                 timeline.device = bulb.id;
                 timeline.dtype = "bulb";
-                if(color[0] == 'now'){
+                if(timeline.color[0] == 'now'){
                     timeline.color[0] == bulb.color;
                 }
             }
@@ -124,7 +124,7 @@ function Timeline(id, time, color, device) {
                                  }else{
                                      timeline.device = group.id;
                                      timeline.dtype = "group";
-                                     if(color[0] == 'now'){
+                                     if(timeline.color[0] == 'now'){
                                          timeline.color[0] == group.bulb[0].color;
                                      }
 
@@ -134,7 +134,7 @@ function Timeline(id, time, color, device) {
                          else{
                              timeline.device = group.id;
                              timeline.dtype = "group";
-                             if(color[0] == 'now'){
+                             if(timeline.color[0] == 'now'){
                                  timeline.color[0] == group.bulb[0].color;
                              }
 
@@ -144,7 +144,7 @@ function Timeline(id, time, color, device) {
                  else{
                      timeline.device = bulb.id;
                      timeline.dtype = "bulb";
-                     if(color[0] == 'now'){
+                     if(timeline.color[0] == 'now'){
                          timeline.color[0] == bulb.color;
                      }
                  }
@@ -154,7 +154,7 @@ function Timeline(id, time, color, device) {
            else{
                timeline.device = bulb.id;
                timeline.dtype = "bulb";
-               if(color[0] == 'now'){
+               if(timeline.color[0] == 'now'){
                    timeline.color[0] == bulb.color;
                }
            }
