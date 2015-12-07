@@ -11,12 +11,11 @@ function loop(data, callback){
     var timer = setInterval(function () {
 
         //update color info regularily, if some other application did change settings
-        console.log("interval started, updating all lights")
+        console.log("interval started, getting stats from all lights")
         var lights = client.lights();
 
         if (lights instanceof Array) {
             lights.forEach(function (light) {
-                console.log("setting color for light " + light.id);
                 config.searchBulbById(light.id, function (bulb) {
                     if (bulb) {
                         bulb.update()
