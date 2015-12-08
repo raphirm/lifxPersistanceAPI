@@ -11,6 +11,26 @@ router.get('/', function(req, res, next) {
   console.log(lights);
   res.render('index', { title: 'Express', 'lights': lights });
 });
+router.get('/scene', function(req, res, next) {
+  var activate_scene = {
+    host: 'api.lifx.com',
+    port: '443',
+    path: '/v1/scenes/',
+    method: 'GET',
+    headers: {
+      'Authorization': 'Bearer '+config.data.token,
+    }
+  };
+  var act_req = https.request(activate_scene, function(res) {
+    res.setEncoding('utf8');
+    res.on('data', function (chunk) {
+      console.log('Response: ' + chunk);
+      res.json(chunk);
+    });
+  });
+  act_req.write('');
+  act_req.end();
+});
 router.get('/scene/:uuid', function(req, res, next) {
   var sceneid = req.params.uuid;
   var activate_scene = {
@@ -20,20 +40,18 @@ router.get('/scene/:uuid', function(req, res, next) {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
-      'Content-Length': Buffer.byteLength(post_data),
       'Authorization': 'Bearer '+config.data.token,
     }
   };
-  var act_req = https.request(activate_scene, function(res) {
-    res.setEncoding('utf8');
-    res.on('data', function (chunk) {
+  var act_req = https.request(activate_scene, function(resi) {
+    resi.setEncoding('utf8');
+    resi.on('data', function (chunk) {
       console.log('Response: ' + chunk);
+      res.json(chunk);
     });
   });
   act_req.write('');
   act_req.end();
-  console.log(lights);
-  res.render('index', { title: 'Express', 'lights': lights });
 });
 
 
