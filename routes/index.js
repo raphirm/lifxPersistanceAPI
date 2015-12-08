@@ -25,7 +25,7 @@ router.get('/scene', function(req, res, next) {
     ress.setEncoding('utf8');
     ress.on('data', function (chunk) {
       console.log('Response: ' + chunk);
-      res.json(chunk);
+      res.send(chunk);
     });
   });
   act_req.write('');
@@ -47,7 +47,7 @@ router.get('/scene/:uuid', function(req, res, next) {
     resi.setEncoding('utf8');
     resi.on('data', function (chunk) {
       console.log('Response: ' + chunk);
-      res.json(chunk);
+      res.send(chunk);
     });
   });
   act_req.write('');
