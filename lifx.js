@@ -11,7 +11,7 @@ function loop(data, callback){
     var timer = setInterval(function () {
 
         //update color info regularily, if some other application did change settings
-        console.log("interval started, getting stats from all lights")
+        console.log(new Date().toString()+": interval started, getting stats from all lights")
         var lights = client.lights();
 
         if (lights instanceof Array) {
