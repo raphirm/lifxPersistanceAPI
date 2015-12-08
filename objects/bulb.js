@@ -80,7 +80,7 @@ Bulb.prototype.toggle = function(){
     var client = require('../lifx.js');
     var light = client.light(this.id);
     if(light) {
-    light.getState(function(state){
+    light.getState(function(error, state){
         if(state) {
             if (state.power == 1) {
                 light.off();
