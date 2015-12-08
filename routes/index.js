@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var client = require('../lifx.js');
-var http = require('https');
+var https = require('https');
 var config = require('../config.js');
 
 
