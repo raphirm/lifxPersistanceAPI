@@ -21,9 +21,9 @@ router.get('/scene', function(req, res, next) {
       'Authorization': 'Bearer '+config.data.token,
     }
   };
-  var act_req = https.request(activate_scene, function(res) {
-    res.setEncoding('utf8');
-    res.on('data', function (chunk) {
+  var act_req = https.request(activate_scene, function(ress) {
+    ress.setEncoding('utf8');
+    ress.on('data', function (chunk) {
       console.log('Response: ' + chunk);
       res.json(chunk);
     });
