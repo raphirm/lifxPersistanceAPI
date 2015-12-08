@@ -81,21 +81,26 @@ Bulb.prototype.toggle = function(){
     var light = client.light(this.id);
     if(light) {
     light.getState(function(state){
-
-            if(state.power = 1) {
+        if(state) {
+            if (state.power == 1) {
                 light.off();
                 bulb.power = 0;
-            }else{
+            } else {
                 light.on();
                 bulb.power = 1;
             }
-        var config = require('../config.js');
-        config.persist(config.file, function(err){});
+            var config = require('../config.js');
+            config.persist(config.file, function (err) {
+            });
+        }else{
+            console.log("state not defined...");
+        }
     });
         }else{
             bulb.connected = false;
         var config = require('../config.js');
         config.persist(config.file, function(err){});
+        console.log("light not found...");
         }
 
 }
