@@ -132,7 +132,7 @@ Bulb.prototype.update = function(){
                         mybulb.power = state.power;
                         mybulb.color = new Color(state.color.hue, state.color.saturation, state.color.brightness, state.color.kelvin);
                     }else{
-                        console.log(new Date().toString()+": No state received for bulb "+mybulb.id)
+                        console.log(new Date().toString()+": No state received for bulb "+mybulb.id+" error: "+error)
                     }
 
 
