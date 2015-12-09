@@ -11,6 +11,7 @@ var users = require('./routes/users');
 var bulb = require('./routes/bulb');
 var group = require('./routes/group');
 var timeline = require('./routes/timeline');
+var flicker = require('./routes/flicker');
 
 var app = express();
 
@@ -29,6 +30,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/users', users);
 app.use('/bulb', bulb);
+app.use('/flicker', flicker);
+
 app.use('/group', group);
 app.use('/timeline', timeline);
 

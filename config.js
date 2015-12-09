@@ -3,6 +3,7 @@ var fs = require('fs');
 var Bulb = require('./objects/bulb.js');
 var Group = require('./objects/group.js');
 var Timeline = require('./objects/timeline.js');
+var Flicker = require('./objects/flicker.js');
 function Config(file) {
     this.file = file;
     this.data = JSON.parse(fs.readFileSync(file, 'utf8'));
@@ -130,6 +131,13 @@ Config.prototype.initTimeline = function(){
         });
     }
     this.data.group = group;
+    var flicker = new Array();
+    if(this.data.flicker instanceof Array){
+        this.data.flicker.forEach(function(g){
+            flicker.push(new Flicker(g));
+        });
+    }
+    this.data.flicker = flicker;
 }
 var config = new Config('config');
 

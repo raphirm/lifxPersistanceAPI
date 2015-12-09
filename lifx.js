@@ -3,33 +3,35 @@ var client = new LifxClient();
 var config = require('./config.js');
 var Bulb = require('./objects/bulb.js');
 var Color= require('./objects/color.js');
-var INTERVAL = 3000;
+var INTERVAL = 200;
 
 function loop(data, callback){
     //config.status=='started'
     var count = 0;
     var timer = setInterval(function () {
+        if ((count % 15) == 0) {
 
-        //update color info regularily, if some other application did change settings
-        console.log(new Date().toString()+": interval started, getting stats from all lights")
-        var lights = client.lights();
+            //update color info regularily, if some other application did change settings
+            console.log(new Date().toString() + ": interval started, getting stats from all lights")
+            var lights = client.lights();
 
-        if (lights instanceof Array) {
-            lights.forEach(function (light) {
-                config.searchBulbById(light.id, function (bulb) {
-                    if (bulb) {
-                        bulb.update()
-                    } else {
-                        console.log(light.id + "is not registred in application");
-                    }
+            if (lights instanceof Array) {
+                lights.forEach(function (light) {
+                    config.searchBulbById(light.id, function (bulb) {
+                        if (bulb) {
+                            bulb.update()
+                        } else {
+                            console.log(light.id + "is not registred in application");
+                        }
+                    });
+
                 });
-
-            });
+            }
         }
-
+        flicker()
         //if there is a timeline, start it now!
         //tbd
-        if ((count % 20) == 0){
+        if ((count % 300) == 0){
             if (config.data.timeline.length > 0) {
 
                 config.data.timeline.forEach(function (timeline) {
@@ -48,7 +50,31 @@ function loop(data, callback){
 
 }
 
+function flicker(){
+    var destiny = Math.random()*100;
+    if(destiny<9){
+        //flicker
+        if(config.data.flicker){
+            config.data.flicker.forEach(function(flicker){
+                var bulb = flicker.bulb;
+                var color = bulb.color;
 
+                var originalb = color.brightness;
+                var maxDelta = originalb * flicker.strength / 100;
+                var strength = Math.ceil(Math.random()*maxDelta);
+                color.brightness = originalb - strength;
+                bulb.setColor(color);
+                console.log("Flicker to "+color.brightness)
+                setTimeout(function(){
+                    color.brightness = originalb;
+                    bulb.setColor(color);
+                    console.log("Flick back to  to "+color.brightness)
+                }, 200)
+
+            })
+        }
+    }
+}
 client.on('listening', function() {
   var address = client.address();
   console.log(
