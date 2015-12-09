@@ -6,13 +6,14 @@ var Color= require('./objects/color.js');
 var INTERVAL = 200;
 
 function loop(data, callback){
+    var flickering = false;
     //config.status=='started'
     var count = 0;
     var timer = setInterval(function () {
         if ((count % 15) != 0 && (count % 14) != 0 && (count % 16) != 0){
-            flicker()
+            flicker(flickering)
         }
-        if ((count % 15) == 0) {
+        if ((count % 15) == 0 && flickering == false) {
 
             //update color info regularily, if some other application did change settings
             console.log(new Date().toString() + ": interval started, getting stats from all lights")
@@ -53,9 +54,10 @@ function loop(data, callback){
 
 }
 
-function flicker(){
+function flicker(flickering){
     var destiny = Math.random()*100;
-    if(destiny<15){
+    if(destiny<80 && flickering == false){
+        flickering = true;
         //flicker
         if(config.data.flicker){
             config.data.flicker.forEach(function(flicker){
@@ -74,6 +76,9 @@ function flicker(){
                     color.time = 0;
                     bulb.setColor(color);
                     console.log("Flick back to  to "+color.brightness)
+                    setTimeout(function(){
+                        flickering = false
+                    }, 80);
                 }, 100)
 
             })
