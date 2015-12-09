@@ -78,7 +78,7 @@ function flicker(flickering){
                     console.log("Flick back to  to "+color.brightness)
                     setTimeout(function(){
                         flickering = false
-                    }, 80);
+                    }, 200);
                 }, 100)
 
             })
