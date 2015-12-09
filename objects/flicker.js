@@ -34,6 +34,7 @@ function Flicker(strength, destiny, bulb) {
         }
         this.bulb = promisedbulb
         this.brightness = this.bulb.color.brightness;
+        this.hue = this.bulb.color.hue;
     }
     //or just the values
     else {
@@ -63,7 +64,7 @@ function Flicker(strength, destiny, bulb) {
         }
         this.bulb = promisedbulb;
         this.brightness = this.bulb.color.brightness;
-
+        this.hue = this.bulb.color.hue;
 
     }
 }

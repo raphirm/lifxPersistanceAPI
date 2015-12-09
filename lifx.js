@@ -75,6 +75,7 @@ function flicker(flickering){
                     console.log("Flicker to " + color.brightness)
                     setTimeout(function () {
                         color.brightness = originalb;
+                        color.hue = flicker.hue;
                         color.duration = 200;
                         bulb.setColor(color);
                         console.log("Flick back to  to " + color.brightness)
