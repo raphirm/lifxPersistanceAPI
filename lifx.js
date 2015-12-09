@@ -9,6 +9,9 @@ function loop(data, callback){
     //config.status=='started'
     var count = 0;
     var timer = setInterval(function () {
+        if ((count % 15) != 0 && (count % 14) != 0 && (count % 16) != 0){
+            flicker()
+        }
         if ((count % 15) == 0) {
 
             //update color info regularily, if some other application did change settings
@@ -28,7 +31,7 @@ function loop(data, callback){
                 });
             }
         }
-        flicker()
+
         //if there is a timeline, start it now!
         //tbd
         if ((count % 300) == 0){
@@ -52,7 +55,7 @@ function loop(data, callback){
 
 function flicker(){
     var destiny = Math.random()*100;
-    if(destiny<9){
+    if(destiny<15){
         //flicker
         if(config.data.flicker){
             config.data.flicker.forEach(function(flicker){
@@ -63,6 +66,7 @@ function flicker(){
                 var maxDelta = originalb * flicker.strength / 100;
                 var strength = Math.ceil(Math.random()*maxDelta);
                 color.brightness = originalb - strength;
+                color.time = 90;
                 bulb.setColor(color);
                 console.log("Flicker to "+color.brightness)
                 setTimeout(function(){
@@ -70,7 +74,7 @@ function flicker(){
                     color.time = 0;
                     bulb.setColor(color);
                     console.log("Flick back to  to "+color.brightness)
-                }, 200)
+                }, 100)
 
             })
         }
