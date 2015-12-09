@@ -32,6 +32,7 @@ function Flicker(strength, bulb) {
             });
         }
         this.bulb = promisedbulb
+        this.brightness = this.bulb.color.brightness;
     }
     //or just the values
     else {
@@ -59,6 +60,8 @@ function Flicker(strength, bulb) {
             });
         }
         this.bulb = promisedbulb;
+        this.brightness = this.bulb.color.brightness;
+
 
     }
 }

@@ -10,10 +10,10 @@ function loop(data, callback){
     //config.status=='started'
     var count = 0;
     var timer = setInterval(function () {
-        if ((count % 15) != 0 && (count % 14) != 0 && (count % 16) != 0){
+
             flicker(flickering)
-        }
-        if ((count % 15) == 0 && flickering == false) {
+
+        if ((count % 15) == 0 ) {
 
             //update color info regularily, if some other application did change settings
             console.log(new Date().toString() + ": interval started, getting stats from all lights")
@@ -56,30 +56,27 @@ function loop(data, callback){
 
 function flicker(flickering){
     var destiny = Math.random()*100;
-    if(destiny<80 && flickering == false){
-        flickering = true;
+    if(destiny<20 && flickering == false){
         //flicker
         if(config.data.flicker){
             config.data.flicker.forEach(function(flicker){
                 var bulb = flicker.bulb;
                 var color = bulb.color;
 
-                var originalb = color.brightness;
+                var originalb = flicker.brightness;
                 var maxDelta = originalb * flicker.strength / 100;
                 var strength = Math.ceil(Math.random()*maxDelta);
                 color.brightness = originalb - strength;
-                color.time = 90;
+                color.time = 100;
                 bulb.setColor(color);
                 console.log("Flicker to "+color.brightness)
                 setTimeout(function(){
                     color.brightness = originalb;
-                    color.time = 0;
+                    color.time = 50;
                     bulb.setColor(color);
                     console.log("Flick back to  to "+color.brightness)
-                    setTimeout(function(){
-                        flickering = false
-                    }, 200);
-                }, 100)
+
+                }, 120)
 
             })
         }
