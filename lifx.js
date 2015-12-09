@@ -55,32 +55,37 @@ function loop(data, callback){
 }
 
 function flicker(flickering){
-    var destiny = Math.random()*100;
-    if(destiny<20 && flickering == false){
+
         //flicker
         if(config.data.flicker){
             config.data.flicker.forEach(function(flicker){
-                var bulb = flicker.bulb;
-                var color = bulb.color;
-
-                var originalb = flicker.brightness;
-                var maxDelta = originalb * flicker.strength / 100;
-                var strength = Math.ceil(Math.random()*maxDelta);
-                color.brightness = originalb - strength;
-                color.time = 100;
-                bulb.setColor(color);
-                console.log("Flicker to "+color.brightness)
-                setTimeout(function(){
-                    color.brightness = originalb;
-                    color.time = 50;
+                if(!flicker.destiny){
+                   flicker.destiny = 20
+                }
+                var destiny = Math.random()*100;
+                if(destiny<flicker.destiny) {
+                    var bulb = flicker.bulb;
+                    var color = bulb.color;
+                    var originalb = flicker.brightness;
+                    var maxDelta = originalb * flicker.strength / 100;
+                    var strength = Math.ceil(Math.random() * maxDelta);
+                    color.brightness = originalb - strength;
+                    color.duration = 200;
                     bulb.setColor(color);
-                    console.log("Flick back to  to "+color.brightness)
+                    console.log("Flicker to " + color.brightness)
+                    setTimeout(function () {
+                        color.brightness = originalb;
+                        color.duration = 200;
+                        bulb.setColor(color);
+                        console.log("Flick back to  to " + color.brightness)
 
-                }, 120)
+                    }, 200)
 
-            })
+                }
+                })
+
         }
-    }
+
 }
 client.on('listening', function() {
   var address = client.address();

@@ -36,31 +36,39 @@ router.get('/:idOrName', function(req, res){
       if (req.query.strength){
         strength = req.query.strength;
       }
+      var destiny = 20;
+    if (req.query.destiny){
+      destiny = req.query.destiny;
+    }
       var bulb = req.params.idOrName;
       config.searchBulbById(bulb, function(b){
         if(b){
-          var f = new Flicker(strength);
+          b.update();
+          var f = new Flicker(strength, destiny, b);
           config.data.flicker.push(f);
           config.persist(config.file, function(){});
           res.json(f);
         }else {
           config.searchBulbByLabel(bulb, function (b) {
             if(b){
-              var f = new Flicker(strength, b);
+              b.update();
+              var f = new Flicker(strength, destiny, b);
               config.data.flicker.push(f);
               config.persist(config.file, function(){});
               res.json(f);
             }else {
               config.searchGroupById(bulb, function (g) {
                 if(g){
-                  var f = new Flicker(strength, b.bulb[0]);
+                  g.bulb[0].update()
+                  var f = new Flicker(strength, destiny, g.bulb[0]);
                   config.data.flicker.push(f);
                   config.persist(config.file, function(){});
                   res.json(f);
                 }else {
                   config.searchGroupByName(bulb, function (g) {
                     if(g){
-                      var f = new Flicker(strength, b.bulb[0]);
+                      g.bulb[0].update()
+                      var f = new Flicker(strength, destiny, g.bulb[0]);
                       config.data.flicker.push(f);
                       config.persist(config.file, function(){});
                       res.json(f);
