@@ -10,8 +10,10 @@ function loop(data, callback){
     //config.status=='started'
     var count = 0;
     var timer = setInterval(function () {
-
+        if((count % 3) == 0) {
             flicker(flickering)
+
+        }
 
         if ((count % 15) == 0 ) {
 

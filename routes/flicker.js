@@ -36,7 +36,7 @@ router.get('/:idOrName', function(req, res){
       if (req.query.strength){
         strength = req.query.strength;
       }
-      var destiny = 20;
+      var destiny = 60;
     if (req.query.destiny){
       destiny = req.query.destiny;
     }
