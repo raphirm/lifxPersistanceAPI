@@ -64,23 +64,24 @@ function flicker(flickering){
                 }
                 var destiny = Math.random()*100;
                 if(destiny<flicker.destiny) {
+                    var flickspeed = 100+ (Math.random()*50)
                     var bulb = flicker.bulb;
                     var color = bulb.color;
                     var originalb = flicker.brightness;
                     var maxDelta = originalb * flicker.strength / 100;
                     var strength = Math.ceil(Math.random() * maxDelta);
                     color.brightness = originalb - strength;
-                    color.duration = 200;
+                    color.duration = flickspeed;
                     bulb.setColor(color);
                     console.log("Flicker to " + color.brightness)
                     setTimeout(function () {
                         color.brightness = originalb;
                         color.hue = flicker.hue;
-                        color.duration = 200;
+                        color.duration = flickspeed;
                         bulb.setColor(color);
                         console.log("Flick back to  to " + color.brightness)
 
-                    }, 200)
+                    }, flickspeed)
 
                 }
                 })
