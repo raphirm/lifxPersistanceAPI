@@ -64,7 +64,7 @@ function flicker(flickering){
                 }
                 var destiny = Math.random()*100;
                 if(destiny<flicker.destiny) {
-                    var flickspeed = Match.floor(100+(Math.random()*50))
+                    var flickspeed = Math.floor(100+(Math.random()*50))
                     var bulb = flicker.bulb;
                     var color = bulb.color;
                     var originalb = flicker.brightness;
