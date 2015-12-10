@@ -115,7 +115,9 @@ Config.prototype.addGroup = function(group){
         }
     })
 };
+Config.prototype.searchFlickerByBulb = function(bulb){
 
+};
 Config.prototype.initTimeline = function(){
     var timeline = new Array();
     if(this.data.timeline instanceof Array){
