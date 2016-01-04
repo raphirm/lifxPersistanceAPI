@@ -85,9 +85,22 @@ Group.prototype.turnOff = function(){
     });
 };
 Group.prototype.toggle = function(){
-    this.bulb.forEach(function(b){
-        b.toggle();
-    })
+    var on = false;
+    for (var i=0; i < this.bulb.length; i++) {
+        if(this.bulb[i] == 1){
+            on = true;
+        }
+    }
+    if(on){
+        this.bulb.forEach(function(b){
+            b.turnOff();
+        })
+    }else{
+        this.bulb.forEach(function(b){
+            b.turnOn();
+        })
+    }
+
 };
 
 module.exports = Group;
