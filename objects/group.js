@@ -87,7 +87,7 @@ Group.prototype.turnOff = function(){
 Group.prototype.toggle = function(){
     var on = false;
     for (var i=0; i < this.bulb.length; i++) {
-        if(this.bulb[i] == 1){
+        if(this.bulb[i].power == 1){
             on = true;
         }
     }
