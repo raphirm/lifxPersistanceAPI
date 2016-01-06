@@ -110,11 +110,14 @@ Bulb.prototype.setColor = function(color, err){
         var light = client.light(this.id);
         if(light) {
             light.color(color.hue, color.saturation, color.brightness, color.kelvin, color.duration);
+            this.color = color;
         }
         else{
             this.connected = false;
+            this.color = color;
+            this.color.duration = 0;
         }
-        this.color = color;
+
         var config = require('../config.js');
         config.persist(config.file, function(err){});
     }else{
