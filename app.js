@@ -12,8 +12,18 @@ var bulb = require('./routes/bulb');
 var group = require('./routes/group');
 var timeline = require('./routes/timeline');
 var flicker = require('./routes/flicker');
-
+/*var MongoClient = require('mongodb').MongoClient;
+var assert = require('assert');*/
 var app = express();
+
+
+var url = 'mongodb://localhost:27017/lifx-persistance';
+MongoClient.connect(url, function(err, db) {
+  assert.equal(null, err);
+  console.log("Connected correctly to server.");
+  db.close();
+});
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

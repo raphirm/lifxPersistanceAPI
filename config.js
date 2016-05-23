@@ -4,6 +4,11 @@ var Bulb = require('./objects/bulb.js');
 var Group = require('./objects/group.js');
 var Timeline = require('./objects/timeline.js');
 var Flicker = require('./objects/flicker.js');
+var url = 'mongodb://localhost:27017/lifx-persistance';
+
+var MongoClient = require('mongodb').MongoClient;
+var assert = require('assert');
+
 function Config(file) {
     this.file = file;
     this.data = JSON.parse(fs.readFileSync(file, 'utf8'));
@@ -28,7 +33,9 @@ Config.prototype.persist = function(file, callback){
         }
     });
 };
+
 Config.prototype.searchBulbByLabel = function(label, callback){
+
     var bulb = undefined;
     for (var i=0; i < this.data.bulb.length; i++) {
         if (this.data.bulb[i].label == label) {
